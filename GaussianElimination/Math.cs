@@ -44,7 +44,7 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 
 			if (denominator == 0) throw new DivideByZeroException("Cannot have a denominator 0.");
 
-			int gcd = Gcd(Abs(numerator), Abs(denominator));
+			var gcd = Gcd(Abs(numerator), Abs(denominator));
 			//use greatest common divisor to simplify fractions
 
 			//use denominator / Abs(denominator) to apply denominators sign to the numerator (prevent negative denominators)
@@ -325,18 +325,18 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 		/// </summary>
 		public void Eliminate() {
 
-			for (int rc = 0; rc < NofVariables && rc < NofRows; rc++) {
+			for (var rc = 0; rc < NofVariables && rc < NofRows; rc++) {
 
 				//1) bestimme weitesten links stehende Spalte mit min. einer Zeile =/= 0
 				var skip = true;
-				for (int r = 0; skip && r < NofRows; r++)
+				for (var r = 0; skip && r < NofRows; r++)
 					if (this[r, rc] != 0) skip = false;
 				if (skip) continue;
 
 				//2) falls nötig, Zeilen vertauschen
 				if (this[rc, rc] == 0) {
 					skip = true;
-					for (int r = rc + 1; skip && r < NofRows; r++)
+					for (var r = rc + 1; skip && r < NofRows; r++)
 						if (this[r, rc] != 0) {
 							SwapRows(rc, r);
 							skip = false;
@@ -348,7 +348,7 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 				MultiplyRow(rc, 1 / this[rc, rc]);
 
 				//4) passende Vielfache der 1. Zeile addieren, um unter der führenden Eins Nullen zu erhalten
-				for (int j = 0; j < NofRows; j++) {
+				for (var j = 0; j < NofRows; j++) {
 					if (rc == j) continue;
 
 					AddRow(j, -this[j, rc] / this[rc, rc], rc);
@@ -360,7 +360,7 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 
 		void SwapRows(int d, int s) {
 
-			for (int c = 0; c < NofColumns; c++) {
+			for (var c = 0; c < NofColumns; c++) {
 				var t = this[d, c];
 				this[d, c] = this[s, c];
 				this[s, c] = t;
@@ -369,13 +369,13 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 
 		void MultiplyRow(int r, Fraction f) {
 
-			for (int c = 0; c < NofColumns; c++)
+			for (var c = 0; c < NofColumns; c++)
 				this[r, c] *= f;
 		}
 
 		void AddRow(int d, Fraction f, int s) {
 
-			for (int c = 0; c < NofColumns; c++)
+			for (var c = 0; c < NofColumns; c++)
 				this[d, c] += f * this[s, c];
 		}
 		#endregion

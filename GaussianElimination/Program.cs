@@ -131,17 +131,14 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 			var variables = r.Next(EQUATIONS_VARIABLES_MIN, EQUATIONS_VARIABLES_MAX);
 
 			var m = new Matrix(equations, variables);
-			for (int e = 0; e < equations; e++)
-				for (int v = 0; v <= variables; v++)
+			for (var e = 0; e < equations; e++)
+				for (var v = 0; v <= variables; v++)
 					m[e, v] = new Fraction(r.Next(VALUE_MIN, VALUE_MAX));
 
 			TestEliminate(m);
 		}
 
-		static void TestEliminate(Fraction[,] m) {
-
-			TestEliminate(new Matrix(m));
-		}
+		static void TestEliminate(Fraction[,] m) => TestEliminate(new Matrix(m));
 
 		static void TestEliminate(Matrix m) {
 
@@ -172,12 +169,12 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 		static void Print(Matrix m) {
 
 			var s = new string[m.NofRows][];
-			for (int i = 0; i < m.NofRows; i++)
+			for (var i = 0; i < m.NofRows; i++)
 				s[i] = new string[m.NofColumns];
 
 			var l = 0;
-			for (int i = 0; i < m.NofRows; i++)
-				for (int j = 0; j < m.NofColumns; j++) {
+			for (var i = 0; i < m.NofRows; i++)
+				for (var j = 0; j < m.NofColumns; j++) {
 					s[i][j] = m[i, j].ToString();
 					if (l < s[i][j].Length) l = s[i][j].Length;
 				}
@@ -185,7 +182,7 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 			var f = string.Format("{{0,{0}}}", l);
 
 			c.WriteLine("---{0}---", new string(' ', (l + 2) * m.NofColumns - 2));
-			for (int i = 0; i < m.NofRows; i++)
+			for (var i = 0; i < m.NofRows; i++)
 				c.WriteLine("| {0} |", string.Join("  ", s[i].Select((n, j) => string.Format((j == m.NofVariables ? "| " : null) + f, n))));
 			c.WriteLine("---{0}---", new string(' ', (l + 2) * m.NofColumns - 2));
 		}

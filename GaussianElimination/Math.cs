@@ -288,20 +288,14 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 		/// </summary>
 		/// <param name="nofEquations">Number of rows / equations in the matrix</param>
 		/// <param name="nofVariables">Number of variables in the matrix</param>
-		public Matrix(int nofEquations, int nofVariables) {
-
-			matrix = new Fraction[nofEquations, nofVariables + 1];
-		}
+		public Matrix(int nofEquations, int nofVariables) => matrix = new Fraction[nofEquations, nofVariables + 1];
 
 		/// <summary>
 		/// Constructor
 		/// Wrap a predefined matrix
 		/// </summary>
 		/// <param name="matrix">Values of the predefined matrix</param>
-		internal Matrix(Fraction[,] matrix) {
-
-			this.matrix = matrix;
-		}
+		internal Matrix(Fraction[,] matrix) => this.matrix = matrix;
 		#endregion
 
 		#region instantiation
@@ -313,8 +307,8 @@ namespace StrubT.Buas.LinAlg.Matrix.GaussianElimination {
 		/// <param name="col">Column index (starts with <c>0</c>)</param>
 		/// <returns>Value at position <c>row</c>,<c>col</c></returns>
 		public Fraction this[int row, int col] {
-			set { matrix[row, col] = value; }
-			get { return matrix[row, col]; }
+			set => matrix[row, col] = value;
+			get => matrix[row, col];
 		}
 		#endregion
 
